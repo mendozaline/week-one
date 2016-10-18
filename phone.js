@@ -1,41 +1,55 @@
+var PHONE_PRICE = 199.99;
 var TAX_RATE = 0.05;
-var PHONE_PRICE = 90.99;
-var ACCESSORY_PRICE = 10.00;
-var SPENDING_THRESHOLD = 200;
-var bankBalance = 2000;
-var numPurchased = 0;
+var ACCESSORY_PRICE = 19.99;
+var SPENDING_THRESHOLD = 900;
+var bankBalance = 1000;
+var totalPhonesPurchased = 0;
 
-while (bankBalance > 0) {
+function phoneCount() {
+    "use strict";
+    totalPhonesPurchased += 1;
+}
+
+function subTotal(phonesTotal) {
+    "use strict";
+    return phonesTotal * (PHONE_PRICE + ACCESSORY_PRICE);
+}
+
+function addTax() {
+    "use strict";
+    return subTotal(totalPhonesPurchased) * TAX_RATE;
+}
+
+function totalPrice() {
+    "use strict";
+    return subTotal(totalPhonesPurchased) + addTax();
+}
+
+var total = totalPrice();
+
+while (total + PHONE_PRICE + ACCESSORY_PRICE < SPENDING_THRESHOLD) {
+    phoneCount();
+    console.log("Running phone total: " + totalPhonesPurchased);
     
-    function calcPrice(price, taxrate, isExempt) {
-        "use strict";
-        return isExempt ? price : price + (price * taxrate);
-    };
-        
-    var finalPrice = calcPrice(PHONE_PRICE+ACCESSORY_PRICE, TAX_RATE);
-    
-    function accountBalance(balance) {
-        "use strict";
-        bankBalance -= finalPrice;
-        bankBalance = bankBalance.toFixed(2);
-        return bankBalance
-    };
-    
-    function phonesPurchased(x) {
-        x += 1;
-        return x
-    };
-    
-    numPurchased = phonesPurchased(numPurchased);
-    
-    if (bankBalance > SPENDING_THRESHOLD) {
-        console.log("Final purchase amount: $" +    
-                        finalPrice.toFixed(2));
-        console.log("Remaining balance: $" + accountBalance());
-        console.log("Phones bought: " + numPurchased);
-        console.log("\n")        
+    total = totalPrice();
+    console.log("Running price total: " + total);
+}
+
+function formatPrice(finalCost) {
+    "use strict";
+    return finalCost.toFixed(2);
+}
+
+console.log("\nTotal phones purchased: " + totalPhonesPurchased);
+console.log("Total cost: $" + formatPrice(total));
+
+function checkBalance() {
+    "use strict";
+    if (total < bankBalance) {
+        return "\nYes, you can afford this.";
     } else {
-        break;        
+        return "\nNo, you can't afford this.";
     }
+}
 
-} //end of while loop
+console.log("\nCan I afford this? " + checkBalance());

@@ -12,7 +12,6 @@ function assignGrade(numScore) {
     } else {
         return "F";
     }
-    
 }
 
 function printGrade() {
@@ -39,4 +38,4 @@ function printGrade() {
 //console.log("For 79, you get a " + assignGrade(79) + ".");
 
 printGrade();
-console.log(nameChanger(name));
+//console.log(nameChanger(name));
