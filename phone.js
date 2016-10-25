@@ -4,16 +4,14 @@ var TAX_RATE = 0.09;
 var SPENDING_THRESHOLD = 100.00;
 var totalPairsBought = 0;
 
-function privateBankInfo() {
+var bankBalance = (function(){
     "use strict";
-    var bankBalance = 1000;
+    var balance = 1000;
     
-    function accessBalance(balance) {
+    return function () {
         return balance;
-    }
-    
-    return accessBalance(bankBalance);
-}
+    };
+})();
 
 function subTotal(pairsBought) {
     "use strict";
@@ -32,7 +30,7 @@ function totalPrice(pairsBought) {
 
 var total = totalPrice(totalPairsBought);
 
-while (privateBankInfo() - (total + PHONE_PRICE + ACCESSORY_PRICE) > SPENDING_THRESHOLD) {
+while (bankBalance() - (total + PHONE_PRICE + ACCESSORY_PRICE) > SPENDING_THRESHOLD) {
     totalPairsBought += 1;
     console.log("Phone/accessory pairs bought so far: ", totalPairsBought);
     
@@ -40,7 +38,7 @@ while (privateBankInfo() - (total + PHONE_PRICE + ACCESSORY_PRICE) > SPENDING_TH
     console.log("Running total: ", total, "\n");
 }
 
-var moneyLeft = privateBankInfo() - total;
+var moneyLeft = bankBalance() - total;
 
 function formatPrice(finalCost) {
     "use strict";
