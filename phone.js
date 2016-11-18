@@ -4,14 +4,14 @@ var TAX_RATE = 0.09;
 var SPENDING_THRESHOLD = 100.00;
 var totalPairsBought = 0;
 
-var bankBalance = (function(){
+var bankBalance = (function accessBalance() {
     "use strict";
     var balance = 1000;
     
-    return function () {
+    return function getBalance() {
         return balance;
     };
-})();
+}());
 
 function subTotal(pairsBought) {
     "use strict";
